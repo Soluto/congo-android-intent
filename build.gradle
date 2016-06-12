@@ -1,4 +1,18 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
 
 android {
     compileSdkVersion 23
@@ -8,7 +22,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName PACKAGE_VERSION
     }
     buildTypes {
         release {
@@ -26,15 +40,31 @@ repositories {
 }
 
 dependencies {
+    compile 'soluto:congo-core-java:0.0.3'
     testCompile 'junit:junit:4.12'
-    compile 'soluto:congo-core-java:0.0.1'
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            artifact "$buildDir/outputs/aar/$PACKAGE_NAME-release.aar"
+            groupId PACKAGE_GROUP
+            artifactId PACKAGE_NAME
+            version PACKAGE_VERSION
+        }
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+}
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_KEY
+    publications = ['MyPublication']
+    pkg {
+        repo = 'soluto-jars'
+        name = PACKAGE_NAME
+        licenses = ['Apache-2.0']
+        version {
+            name = PACKAGE_VERSION
+        }
     }
 }
