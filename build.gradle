@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile 'soluto:congo-core-java:0.0.3'
+    compile 'soluto:congo-core-java:0.0.4'
     testCompile 'junit:junit:4.12'
 }
 

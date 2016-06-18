@@ -17,9 +17,9 @@ public class IntentRemoteCallListener implements RemoteCallListener {
     private final Observable<RemoteCall> remoteCalls;
     public static final String INTENT_DATA_NAME = "data";
 
-    public IntentRemoteCallListener(Context context, String intentPrefix, String incomingIntentPermission) {
+    public IntentRemoteCallListener(Context context, String intentPrefix, String incomingIntentPermission, String requestChannel) {
         this.remoteCalls = BroadcastObservable
-                .fromBroadcast(context, new IntentFilter(intentPrefix + "_RemoteCall"), incomingIntentPermission, new Handler())
+                .fromBroadcast(context, new IntentFilter(intentPrefix + "_" + requestChannel), incomingIntentPermission, new Handler())
                 .map(toRemoteCall());
     }
 
@@ -32,8 +32,7 @@ public class IntentRemoteCallListener implements RemoteCallListener {
         return new Func1<Intent, RemoteCall>() {
             @Override
             public RemoteCall call(Intent intent) {
-                RemoteCall incomingRequest = new Gson().fromJson(intent.getStringExtra(INTENT_DATA_NAME), RemoteCall.class);
-                return incomingRequest;
+                return new Gson().fromJson(intent.getStringExtra(INTENT_DATA_NAME), RemoteCall.class);
             }
         };
     }
