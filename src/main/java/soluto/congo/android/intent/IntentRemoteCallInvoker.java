@@ -6,13 +6,11 @@ import android.content.IntentFilter;
 
 import com.google.gson.Gson;
 
-import rx.Completable;
 import rx.Notification;
 import rx.Observable;
+import rx.android.broadcastobservable.BroadcastObservable;
 import rx.functions.Action0;
-import rx.functions.Func0;
 import rx.functions.Func1;
-import rxutils.BroadcastObservable;
 import soluto.congo.core.RemoteCall;
 import soluto.congo.core.RemoteCallInvoker;
 import soluto.congo.core.RemoteCallResult;

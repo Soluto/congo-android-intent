@@ -8,8 +8,8 @@ import android.os.Handler;
 import com.google.gson.Gson;
 
 import rx.Observable;
+import rx.android.broadcastobservable.BroadcastObservable;
 import rx.functions.Func1;
-import rxutils.BroadcastObservable;
 import soluto.congo.core.RemoteCall;
 import soluto.congo.core.RemoteCallListener;
 

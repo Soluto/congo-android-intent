@@ -41,6 +41,7 @@ repositories {
 
 dependencies {
     compile 'soluto:congo-core-java:0.0.4'
+    compile 'soluto:rx-android-broadcast-observable:0.0.2'
     testCompile 'junit:junit:4.12'
 }
 
